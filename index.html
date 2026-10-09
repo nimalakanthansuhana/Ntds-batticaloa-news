@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ta"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NTDS Batticaloa News</title>
+<style>
+body{margin:0;background:#f3f5f7;color:#17212b;font:16px Arial,'Noto Sans Tamil',sans-serif;line-height:1.7}header{background:#102b46;color:#fff;text-align:center;padding:22px 12px;border-bottom:5px solid #f4b400}h1{margin:0;font-size:clamp(25px,5vw,38px)}nav{background:#c62828;padding:12px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}nav a{color:white;text-decoration:none;font-weight:bold}.wrap{max-width:900px;margin:auto;padding:16px}.notice,.card{background:white;border-radius:10px;padding:16px;margin:14px 0;box-shadow:0 2px 8px #0001}.notice{background:#eef6ff}.title{border-left:5px solid #c62828;padding-left:10px}input,textarea,select{width:100%;box-sizing:border-box;padding:11px;margin:5px 0 12px;border:1px solid #bbc4ce;border-radius:7px;font:inherit}textarea{min-height:130px}button{background:#c62828;color:white;border:0;padding:11px 15px;border-radius:7px;font-weight:bold;margin:4px 4px 4px 0}article h3{color:#102b46;margin:0}small{color:#667085}footer{text-align:center;background:#102b46;color:white;padding:18px;margin-top:25px}.rss{padding:12px;background:white;border-radius:8px}
+</style></head><body>
+<header><h1>NTDS Batticaloa News</h1><div>மட்டக்களப்பு செய்திகள் • இலங்கை • உலகம்</div></header>
+<nav><a href="#latest">சமீபத்திய செய்திகள்</a><a href="#rss">RSS தலைப்புகள்</a><a href="#admin">செய்தி பதிவேற்றம்</a></nav>
+<main class="wrap"><div class="notice"><b>வரவேற்கிறோம்!</b><br>இது NTDS Batticaloa News இணையதளத்தின் தொடக்க மாதிரி. நீங்கள் சேர்க்கும் செய்திகள் இந்த போனின் உலாவியில் மட்டுமே சேமிக்கப்படும். பொதுமக்கள் இணையத்தில் பார்க்க, தளத்தை hosting-ல் வெளியிட வேண்டும்.</div>
+<h2 class="title" id="latest">சமீபத்திய செய்திகள்</h2><div id="newsList"></div>
+<h2 class="title" id="rss">தமிழ் RSS செய்தித் தலைப்புகள்</h2><div class="rss">RSS தானியக்க இணைப்பு இன்னும் அமைக்கப்படவில்லை. இணையதளத்தை வெளியிட்ட பிறகு அனுமதிக்கப்பட்ட தமிழ் RSS ஊட்டங்களை இணைக்க வேண்டும்.</div>
+<h2 class="title" id="admin">செய்தியைப் பதிவேற்றுங்கள்</h2><div class="card"><form id="form">
+<label>செய்தித் தலைப்பு</label><input id="title" required maxlength="160" placeholder="செய்தித் தலைப்பை எழுதுங்கள்">
+<label>செய்திப் பிரிவு</label><select id="category"><option>மட்டக்களப்பு</option><option>இலங்கை</option><option>உலகம்</option><option>கல்வி</option><option>விளையாட்டு</option><option>வணிகம்</option></select>
+<label>செய்தி விவரம்</label><textarea id="body" required placeholder="செய்தி விவரத்தை எழுதுங்கள்"></textarea>
+<label>மூலச் செய்தி இணைப்பு (விருப்பம்)</label><input id="source" type="url" placeholder="https://...">
+<button type="submit">செய்தியைச் சேர்க்கவும்</button><button type="button" id="backup">காப்புப் பிரதி பதிவிறக்கம்</button>
+</form><small>இது மாதிரி நிர்வாக வசதி மட்டுமே; பாதுகாப்பான உள்நுழைவு இல்லை. பொதுத் தளத்தில் நேரடியாகப் பயன்படுத்த வேண்டாம்.</small></div></main>
+<footer><b>NTDS Batticaloa News</b><br>தமிழில் செய்திகளை அறிந்துகொள்ளுங்கள்</footer>
+<script>
+const seed={title:'NTDS Batticaloa News-க்கு வரவேற்கிறோம்',category:'மட்டக்களப்பு',body:'இது உங்கள் இணையதளத்தின் மாதிரி செய்தி. கீழே உள்ள பதிவேற்றப் பகுதியில் உங்கள் செய்தியைச் சேர்த்துப் பார்க்கலாம்.',source:'',date:new Date().toLocaleDateString('ta-LK')};
+function read(){try{let x=JSON.parse(localStorage.getItem('ntdsNews'));return Array.isArray(x)?x:[seed]}catch(e){return [seed]}}
+function render(){let root=document.getElementById('newsList');root.innerHTML='';read().slice().reverse().forEach(n=>{let a=document.createElement('article');a.className='card';let h=document.createElement('h3');h.textContent=n.title;let sm=document.createElement('small');sm.textContent=n.category+' • '+n.date;let p=document.createElement('p');p.textContent=n.body;a.append(h,sm,p);if(n.source){let link=document.createElement('a');link.href=n.source;link.target='_blank';link.rel='noopener';link.textContent='மூலச் செய்தியைப் பார்க்க';a.append(link)}root.append(a)})}
+document.getElementById('form').addEventListener('submit',e=>{e.preventDefault();let ns=read().filter(n=>n.title!==seed.title||n.body!==seed.body);ns.push({title:document.getElementById('title').value.trim(),category:document.getElementById('category').value,body:document.getElementById('body').value.trim(),source:document.getElementById('source').value.trim(),date:new Date().toLocaleDateString('ta-LK')});localStorage.setItem('ntdsNews',JSON.stringify(ns));e.target.reset();render();alert('இந்த போனின் உலாவியில் செய்தி சேர்க்கப்பட்டது.')});
+document.getElementById('backup').addEventListener('click',()=>{let b=new Blob([JSON.stringify(read(),null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='ntds-news-backup.json';a.click();URL.revokeObjectURL(a.href)});render();
+</script></body></html>
